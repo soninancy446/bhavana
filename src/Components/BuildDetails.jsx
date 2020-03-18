@@ -530,10 +530,6 @@ export default function BuildDetails(props) {
         }
         else  {
             // return approveBuilds / buildsOfEach * 100
-            // return approveBuilds/(buildsOfEach+approveBuilds)*100
-            // return (approveBuilds/buildsOfEach)*100
-            // return 100-(approveBuilds/buildsOfEach)*100
-
             return (approveBuilds/(rejectBuilds+approveBuilds))*100
         }
     }
