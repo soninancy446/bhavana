@@ -1,0 +1,312 @@
+.login{
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  font-family: 'Times New Roman', Times, serif;
+  padding-top: 1em;
+  margin-top: 2em;
+  flex-wrap: wrap;
+}
+.title{
+  display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.mainlogin{
+  box-shadow:
+  -6px -6px 8px -4px rgba(118, 150, 254, 0.75),
+   6px -6px 8px -4px rgba(68, 60, 50, 0.75),
+   6px 6px 8px -4px rgba(139, 139, 95, 0),
+   6px 6px 8px -4px rgba(0,0,255,2.75);
+  width: 20%;
+  height: 60%;
+  border-radius: 2%;
+  padding: 5%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.Button{
+  padding-top: 1em;
+  width: 100%;
+  text-align: center;
+
+}
+.depositContext{
+  flex: 1;
+}
+/* Deshaboard */
+.toolbar{
+ flex-grow: 1;
+display: none;
+  display: block;
+
+}
+.appBarSpacer{ 
+
+  flex-Grow: 1;
+  height:'100vh';
+  overflow: 'auto';
+}
+.fixedHeightPaper{
+  padding: spacing(2);
+  height: 240;
+  display: 'flex';
+  overflow: 'auto';
+  flex-direction: 'column';
+}
+/* .appBarSpacer {mixins.toolbar;} */
+.content{
+  flex-grow: 1;
+  height: '100vh';
+  overflow: 'auto';
+  padding-top: 8em;
+}
+.container{
+  padding-top: spacing(4);
+  padding-bottom:spacing(4);
+}
+
+.tittleOfDash{
+  flex-grow: 1;
+    display: 'none';
+      display: 'block';
+}
+
+td.MuiTableCell-root.MuiTableCell-body{  transition: 0.2s ease;}
+/* td.MuiTableCell-root.MuiTableCell-body:hover {
+
+  transform: scale3d(1, 1.1, 1);
+  color: #0b1269;
+  box-shadow: inset 0px 0px 20px 11px #bfd6e4;
+} */
+
+  /* .tableCell :hover {
+background-color: blue;
+  } */
+  .page{
+   
+   margin:8% auto  0 auto; 
+ 
+  
+  }
+  .form-field{
+    margin-left: -15%;
+  }
+.homepageostosub{
+  margin-top: 10%;
+  width:148%
+}
+  .cardView{
+   
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    min-height: 400px;
+    height: 100%;
+    /* display: inline-flexbox; */
+    width: 700px;
+    margin-left: auto;
+margin-right: auto;
+margin-top:20px; 
+/* background-color: rgb(17, 168, 228); */
+  }
+  .View1{
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    width: 50%;
+    min-height: 400px;
+    height: 100%;
+    /* display: inline-flexbox; */
+    width: 700px;
+    margin-left: auto;
+margin-right: auto;
+margin-top:20px; 
+  }
+
+  .buttons1{
+    margin:19px 0px 0px 120px;
+  }
+.dropDown{
+  width : 47%
+}
+.addUserButton{
+  margin-top: 5%;
+  margin-left: 70%;
+}
+.allThreeElements{
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+  .radio-groups{
+    display: flex;
+    flex-direction: row;
+  }
+  .roleContents{
+    display: flex;
+    align-content: space-between;
+    flex-direction: row;
+  }
+
+  .submitbutton{
+    align-items: center;
+    justify-content: center;
+    /* margin:   0 50% 0 50%; */
+  }
+  .card {
+    width: 100%;
+}
+ul.pagination {
+  display: block;
+  text-align: center;
+  margin-left: auto;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  margin-top: 30px;
+}
+
+ul.pagination > li {
+  display: inline-block;
+  margin-right: 15px;
+  cursor: pointer;
+  padding: 0px 5px;
+  background: #8ac6f3;
+  transition: 0.2s ease;
+  color: #fff;
+}
+ul.pagination > li:hover{
+  transform: scale(1.2);
+}
+.add-heading {
+    padding: 10px;
+    background: #f7f2f6;
+    font-weight: 500;
+}
+
+.project_manager, .org_lead{
+    padding: 10px;
+}
+.users{  padding: 10px;}
+.MuiOutlinedInput-input {
+  padding: 18.5px 40px !important;
+}
+.MuiPaper-elevation1{
+  padding: 50px 0;
+  box-shadow: 0px 5px 6px 2px #cacaca;
+}
+.dropDown{
+  width: 100%;
+  max-width: 363px;
+  padding: 10px;
+  margin: 0 auto;
+  display: block;
+  clear: both;
+  float: none;
+}
+.card{margin: 15px 0;}
+.buttons1{margin:0;margin-top: 30px;}
+.heading,.rules{padding: 10px;border-bottom: 1px solid #7d7d7d;}
+.DropList {
+  display: block;
+  padding: 10px;
+  background: #fff;
+  border: 1px solid;
+  outline: none;
+  float: right;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+}
+.MuiPaper-root.makeStyles-root-1.MuiPaper-elevation1.MuiPaper-rounded{padding: 0;}
+.triggerButton{
+
+}
+.admintable{
+  width: 300%,
+}
+.main-container > div {
+  vertical-align: bottom;
+    margin-right: 30px;
+    margin-bottom: 20px;
+    //display: -webkit-box;
+}
+ 
+.main-container {
+  margin-top: -50px;
+  /* text-align: right; */
+  margin-left: 20px;
+  border-bottom: 1px solid;
+} 
+.makeStyles-container-2{padding: 30px;}
+.popup {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  align-items: flex-start;
+}
+.popup .left .DropList{
+  margin:0;
+}
+/* .MuiGrid-root.MuiGrid-item {
+  margin: auto;
+  max-width: 375px;
+} */
+.regis .MuiGrid-root.MuiGrid-item {
+  max-width: 100%;
+}
+ul.MuiPagination-ul {
+  text-align: center;
+  width: 100%;
+  max-width: 200px;
+  margin: auto;
+  margin-top: 20px;
+}
+.Admin-table {
+  margin-top: 100px;
+  width: 1100px
+}
+
+.Admin-table svg {
+  float: right;
+  font-size: 35px;
+  margin-bottom: 10px;
+}
+
+.Admin-table > div {
+  padding: 0;
+}
+.Admin-table table th {
+  font-weight: 800;
+  font-size: 18px;
+}
+.approve-rejected {
+  
+}
+
+.makeStyles-root-377 {
+  width: 100%;
+  /* margin: 10px; */
+  display: flex;
+  font-weight: bold;
+}
+
+.productName{
+  padding-left: 18px;
+  padding-bottom: 18px;
+  font-weight: bold;
+  border-bottom: 1px solid;
+  
+} 
+.userTable{
+  margin-top: 100px;
+    width: 1100px;
+}
+.page{
+  margin: 0px;
+}
