@@ -18,7 +18,7 @@ class App extends React.Component{
      return (
         <Router>
            <Switch>
-            <Route path='/Dashboard'   component={MyDashboard} />
+            <Route path='/Dashboard'   component={MyDashboard} />  
             <Route  path='/' exact component={Login} />
             <Route  path='Tablebuild' exact component={Tablebuild} />
             <Route path='/GetAllProductsComponent'  component={GetAllProductsComponent}/>

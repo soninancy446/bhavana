@@ -41,7 +41,6 @@ class Login extends Component {
 
             console.log(res.clone().json())
             return res.json()
-            //this.props.history.push('/Dashboard')
         }).then((key) => {
             console.log(key)
             if (key === 'Invalid user') {
@@ -67,12 +66,6 @@ class Login extends Component {
                 var date=new Date().getDate()
                 var month=new Date().getMonth()+1
                 var year=new Date().getFullYear();
- 
-                // var hour=new Date().getHours();
-                // var minutes=new Date().getMinutes
-               /// var seconds=new Date().getSeconds()
-
-
                 this.setState({
                     currentDate : year+'-'+month+'-'+date
 
@@ -83,7 +76,6 @@ class Login extends Component {
             }
 
         }).catch((err) => {
-            //this.props.history.push('/Dashboard')
             console.log("eror-->", err)
             this.setState({
 
@@ -94,9 +86,6 @@ class Login extends Component {
         })
     }
 
-
-
-    // onClose={() => this.state.alert({ ...alert, open: false })}
 
     render() {
         return (

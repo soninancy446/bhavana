@@ -4,24 +4,9 @@ import TablePagination from '@material-ui/core/TablePagination';
 import Card from '@material-ui/core/Card'
 import {  CardHeader, CardContent } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
-import CloseIcon from '@material-ui/icons/Close';
 import Toolbar from '@material-ui/core/Toolbar';
-import Reactpagination from './Reactpagination'
-import {  Dialog, DialogTitle } from '@material-ui/core';
-import { DialogContent } from '@material-ui/core';
-import Pagination from '@material-ui/lab/Pagination';
 import Typography from '@material-ui/core/Typography';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { TextField } from '@material-ui/core';
-import FormControl from '@material-ui/core/FormControl';
 import { fade, makeStyles } from '@material-ui/core/styles';
-import GetAppOutlined from '@material-ui/icons/GetAppOutlined';
-import { Link } from 'react-router-dom';
-import { Button } from '@material-ui/core';
-
-import { withStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Drawer from '@material-ui/core/Drawer';
 import Container from '@material-ui/core/Container';
@@ -31,9 +16,7 @@ import Badge from '@material-ui/core/Badge';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-
 import ListItemsDrawer from './ListItemsDrawer';
-
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -42,7 +25,6 @@ import TableRow from '@material-ui/core/TableRow';
 import Grid from '@material-ui/core/Grid';
 import TableContainer from '@material-ui/core/TableContainer';
 import Paper from '@material-ui/core/Paper';
-import Checkbox from '@material-ui/core/Checkbox';
 import {getAllUserForAdmin} from '../Services/ServiceNew'
 
 const drawerWidth = 240;
@@ -229,7 +211,6 @@ export default function Admin(props) {
         })
 
     },[])
-   // const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const [productDialog, setProductDialog] = React.useState(false);
   const userRegistationPage =()=>{
@@ -307,7 +288,7 @@ props.history.push("/GetAllProductsComponent");
          Manage Your Project
         </Typography>
         <Typography className={classes.username} componnet="h2">
-          Hi, {sessionStorage.getItem('name')}
+          hi, {sessionStorage.getItem('name')}
         </Typography>
       </Toolbar>
     </AppBar>
@@ -370,7 +351,7 @@ props.history.push("/GetAllProductsComponent");
 
                                             <TableCell className={classes.tablecellfont}>Name</TableCell>
                                             <TableCell className={classes.tablecellfont}>Role</TableCell>
-                                            <TableCell className={classes.tablecellfont}>Email</TableCell>
+                                            <TableCell className={classes.tablecellfont}>Email </TableCell>
                                             <TableCell className={classes.tablecellfont}>Product</TableCell>
                                             
 

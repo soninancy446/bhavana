@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-// import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -8,7 +7,6 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
 import Title from './TitleCard';
-import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import clsx from 'clsx';
@@ -60,9 +58,6 @@ export default function RecentProductTable(props) {
         console.log(res.clone().json())
     return res.json()
     }
-      // console.log(res.clone().json())
-      
-      // return res.json()
     }).then((key)=>{
       setProject(key);
     }).catch((err)=>{

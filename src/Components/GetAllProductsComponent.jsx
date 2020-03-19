@@ -35,16 +35,8 @@ import AddCircleIcon from "@material-ui/icons/AddCircleOutline";
 import clsx from 'clsx';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import InputLabel from '@material-ui/core/InputLabel';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import TextField from '@material-ui/core/TextField';
-import Popper from '@material-ui/core/Popper';
-import PopupState, { bindToggle, bindPopper } from 'material-ui-popup-state';
-import Fade from '@material-ui/core/Fade';
-import Paper from '@material-ui/core/Paper';
 import CardContent from '@material-ui/core/CardContent';
 const drawerWidth = 240;
 
@@ -62,6 +54,9 @@ const useStyles = makeStyles(theme => ({
     padding: '0 8px',
     ...theme.mixins.toolbar,
   },
+  username: {
+    fontSize: '1.2rem'
+},
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(['width', 'margin'], {
@@ -385,8 +380,9 @@ console.log(err)
             Products
           </Typography>
           <Typography className={classes.username} componnet="h2">
-          Hi,{sessionStorage.getItem('name')}
+          hi,{sessionStorage.getItem('name')}
         </Typography>
+
         </Toolbar>
       </AppBar>
       <Drawer

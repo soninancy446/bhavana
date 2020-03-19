@@ -1,45 +1,32 @@
 import React from 'react'
 import CloseIcon from '@material-ui/icons/Close';
-// import AddCircleOutline from '@material-ui/icons/AddCircleOutline';
-import Reactpagination from './Reactpagination'
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { TextField, Dialog, DialogTitle, DialogContentText } from '@material-ui/core';
-import FormControl from '@material-ui/core/FormControl';
+import { TextField, Dialog, DialogTitle } from '@material-ui/core';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import GetAppOutlined from '@material-ui/icons/GetAppOutlined';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import { Link } from 'react-router-dom';
 import { Button } from '@material-ui/core';
 import { DialogContent } from '@material-ui/core';
-import Pagination from './Pagination'
-import { withStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Drawer from '@material-ui/core/Drawer';
 import Container from '@material-ui/core/Container';
 import { getProductBuildDetails } from '../Services/ServiceNew'
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import Badge from '@material-ui/core/Badge';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import ListItemsDrawer from './ListItemsDrawer';
-// import ReactTable from 'react-table-6'
 import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Grid from '@material-ui/core/Grid';
 import TableContainer from '@material-ui/core/TableContainer';
 import Paper from '@material-ui/core/Paper';
-import Checkbox from '@material-ui/core/Checkbox';
 import { getTriggerBranchData } from '../Services/ServiceNew'
 const drawerWidth = 240;
 const useStyles = makeStyles(theme => ({
@@ -203,9 +190,6 @@ export default function Tablebuild(props) {
         setCommtId(event)
     }
     const handleAdmin = () => {
-
-        //validation api call and logout
-
         props.history.push("/Admin");
     }
     const handleLogout = () => {
@@ -292,7 +276,6 @@ export default function Tablebuild(props) {
     console.log(project.length)
     const currentPosts = project.slice(indexOfFirstPage, indexOfLastPage)
 
-   
 const  getProductBUilds =()=>{getProductBuildDetails(props.location.state.producId).then((res) => {
     console.log(res.clone().json())
     return res.json()
@@ -491,7 +474,7 @@ const getBranchData =()=>{
 
                                     ))}
                                 </div> </Table>
-                            {/* <Reactpagination postsPerPage={postPerPage} totalPosts={project.length} paginate={paginate} /> */}
+                            
                         </TableContainer>
                     </Paper>
                 </Container></main>

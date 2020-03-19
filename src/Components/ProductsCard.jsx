@@ -1,9 +1,7 @@
 import React,{useEffect} from 'react';
-import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Title from './TitleCard';
-import {getProductCount} from '../Services/ServiceNew'
 import {getAllProductsCount} from '../Services/ServiceNew'
 
 const useStyles = makeStyles({
@@ -53,17 +51,12 @@ export default function RejectsCard(props) {
 
   const classes = useStyles();
   return (
-    <React.Fragment>
-      <Title>Number of Products</Title>
-      <Typography component="p" variant="h4">
+    <React.Fragment style={{textAlign:'center',fontSize:'30px'}}>
+      <Title style={{textAlign:'center',fontSize:'30px'}}>Number of Products</Title>
+      <Typography component="p" variant="h4" style={{textAlign:'center',fontSize:'30px'}}>
 
-      </Typography><span><h2>{JSON.stringify(project)}</h2></span>
+      </Typography><span><h2 style={{ color: "#5c5a56",fontWeight : '500'}}>{JSON.stringify(project)}</h2></span>
       <Typography color="textSecondary" className={classes.depositContext}></Typography>
-      {/* <div>
-        <Link color="primary" href="#" onClick={()=>handleAllProduct()}>
-          View Products
-        </Link>
-      </div> */}
     </React.Fragment>
   );
 }

@@ -1,31 +1,26 @@
 import React,{useEffect}from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
-import { TextField, Button } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 import Box from '@material-ui/core/Box';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-// import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import Badge from '@material-ui/core/Badge';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import ListItemsDrawer from './ListItemsDrawer'
 import ProductsCard from './ProductsCard';
 import ApprovedCard from './ApprovedCard';
 import BuildsCard from './BuildsCard';
 import RecentProductTable from './RecentProductTable';
 import RejectedCard from './RejectedCard'
-import {isValidUser} from '../Services/ServiceNew'
 
 function Copyright() {
   return (
@@ -126,7 +121,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function Dashboard(props) {
-  const ip = "13.127.18.137"
+
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const [project, setproject] = React.useState([]);
@@ -181,7 +176,7 @@ export default function Dashboard(props) {
             Dashboard
           </Typography>
           <Typography className={classes.username} componnet="h2">
-          Hi,{sessionStorage.getItem('name')}
+          hi,{sessionStorage.getItem('name')}
         </Typography>
           {/* <TextField id="outlined-basic" label="Commit id" variant="outlined" /> */}
       {/* vonClick={()=>{handleAdmin()}}    */}
@@ -211,12 +206,12 @@ export default function Dashboard(props) {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
-        <Container maxWidth="lg" className={classes.container}>
-          <Grid container spacing={3} style={{ textAlign: "center" ,fontSize:'30px' }}>
+        <Container maxWidth="lg" className={classes.container} style={{textAlign:'center',fontSize:'30px'}}>
+          <Grid container spacing={3} style={{textAlign:'center',fontSize:'30px'}}>
             {/* Total no of Project */}
-            <Grid item xs={12} md={4} lg={3}>
+            <Grid item xs={12} md={4} lg={3} style={{textAlign:'center',fontSize:'30px'}}>
               <Paper className={fixedHeightPaper}>
-              <ProductsCard props={props}/> 
+                <ProductsCard props={props}/>
               </Paper>
             </Grid>
             {/* Recent Builds */}

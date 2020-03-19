@@ -6,19 +6,16 @@ import { fade, makeStyles } from '@material-ui/core/styles';
 import CardHeader from '@material-ui/core/CardHeader';
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent';
-// import { Button } from '@material-ui/core';
 import clsx from 'clsx';
 import Drawer from '@material-ui/core/Drawer';
 import Container from '@material-ui/core/Container';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import Badge from '@material-ui/core/Badge';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ListItemsDrawer from './ListItemsDrawer';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
@@ -44,6 +41,9 @@ const useStyles = makeStyles(theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
+  },
+  descriptionfont : {
+    fontSize: '1.3em'
   },
   appBarShift: {
     marginLeft: drawerWidth,
@@ -184,7 +184,7 @@ export default function GetAllProductsComponent(props) {
             About Us
         </Typography>
         <Typography className={classes.username} componnet="h2">
-          Hi,{sessionStorage.getItem('name')}
+          hi,{sessionStorage.getItem('name')}
         </Typography>
         </Toolbar>
       </AppBar>
@@ -230,7 +230,8 @@ export default function GetAllProductsComponent(props) {
                     <Divider></Divider>
                     <Grid container alignItems="center" direction="column">  
                     <Grid item>                                      
-                    <CardContent>
+                    <CardContent className={classes.descriptionfont}>
+                    Bhavana Devops workflow application helps to visualize, analyze and manage the Products &  builds  in products that are developing in the Company.
                     <Typography varient="h3" gutterBottom>
                         
 </Typography>

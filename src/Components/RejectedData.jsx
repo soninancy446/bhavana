@@ -1,28 +1,33 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { fade, makeStyles } from '@material-ui/core/styles';
+// import { Button } from '@material-ui/core';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Title from './TitleCard';
 import clsx from 'clsx';
 import Drawer from '@material-ui/core/Drawer';
 import Container from '@material-ui/core/Container';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
+import Badge from '@material-ui/core/Badge';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import NotificationsIcon from '@material-ui/icons/Notifications';
 import ListItemsDrawer from './ListItemsDrawer';
 import Grid from '@material-ui/core/Grid';
-import UserRegistration from './UserRegistration'
+import Paper from '@material-ui/core/Paper';
 const drawerWidth = 240;
-
 
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
-  },
-  username : {
-    fontSize: '1.2rem'
   },
   toolbar: {
     paddingRight: 24, // keep right padding when drawer closed
@@ -56,7 +61,7 @@ const useStyles = makeStyles(theme => ({
     display: 'none',
   },
   title: {
-    flexGrow: 0.9,
+    flexGrow: 1,
   },
   drawerPaper: {
     position: 'relative',
@@ -128,9 +133,12 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function Registration(props) {
-    const classes = useStyles();
+export default function Approved(props) {
+    const ip = "13.127.18.137"
+  const classes = useStyles();
   const [open, setOpen] = React.useState(true);
+  const [showData, setShowData] = React.useState(true);
+  const [approved, setapproved] = React.useState([]);
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -142,6 +150,9 @@ export default function Registration(props) {
     props.history.push("/Dashboard");
     console.log("MyDashboard");
   };
+  const handleApproveddata=(getApprove)=>{
+    setapproved(getApprove);
+  }
   const handleAllProduct = () => {
 
     console.log("GetAllProducts");
@@ -153,12 +164,24 @@ props.history.push("/GetAllProductsComponent");
 
     props.history.push("/AboutUsComponent");
   }
-  const handleAdmin=()=>{
-    props.history.push("/Admin");
-  }
-  const handleLogout=()=>{
-    props.history.push("/");
-  }
+  const handleShowData = () => {
+    setShowData(!showData);
+  };
+  
+  
+ 
+  useEffect(() => {
+    async function fetchData() {
+      var proxyUrl = 'https://cors-anywhere.herokuapp.com/',
+        targetUrl = 'http://' + ip + ':8000/api/v1/workflow/build/rejected/'
+      const res = await fetch(proxyUrl + targetUrl)
+      res
+        .json()
+        .then(res => setapproved(res))
+        // .catch(err => setShow(err));
+    }
+    fetchData();
+  }, []);
   return (
     <div className={classes.root}>
     <CssBaseline />
@@ -174,10 +197,7 @@ props.history.push("/GetAllProductsComponent");
           <MenuIcon />
         </IconButton>
         <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-         Registration
-        </Typography>
-        <Typography className={classes.username} componnet="h2">
-          hi,{sessionStorage.getItem('name')}
+       Rejected Builds
         </Typography>
       </Toolbar>
     </AppBar>
@@ -197,27 +217,32 @@ props.history.push("/GetAllProductsComponent");
      <ListItemsDrawer 
        Dashboard={handleDeshboard}
        AllProduct={handleAllProduct}
-       AboutUs={handleAboutUs}
-       Admin={handleAdmin}
-       Logout={handleLogout}   />
+       AboutUs={handleAboutUs}   />
      
     </Drawer>
    <main className={classes.content}>
       <div className={classes.appBarSpacer} />
-      <Container maxWidth="lg" className={classes.container}>
-      <div className="regis">
-      <Grid item xs={12} md={4} lg={3}>
-        
-      <UserRegistration />
-          </Grid>
-          </div>
-          </Container>
-         </main>
-    {/* <div> */}
-      {/* <Button onClick={getProducts}>Show Products</Button> */}
-     
+      <Table size="small">
+        <TableHead>
+          <TableRow>
 
+            <TableCell><h2>Builds</h2></TableCell>
+            <TableCell><h2>Status</h2></TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {approved.map(row => (
+            <TableRow key={row.id}>
+{console.log(approved)
+}             <TableCell>{row.properties_dict.version_number}</TableCell>
+              <TableCell>{row.properties_dict.status}</TableCell>
+             
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+     
+          </main>
     </div>
-  // </div> */}
 );
 }

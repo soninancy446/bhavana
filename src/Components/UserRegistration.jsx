@@ -3,29 +3,15 @@ import { withRouter } from 'react-router-dom';
 import Snackbar from '@material-ui/core/Snackbar'
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
 import TextField from '@material-ui/core/TextField';
-
 import { Card } from '@material-ui/core';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import { getAllProducts } from '../Services/ServiceNew'
 import { Paper } from '@material-ui/core';
 import { addUser, getProducts } from '../Services/ServiceNew'
-import Dialog from '@material-ui/core/Dialog';
-import DialogContent from '@material-ui/core/DialogContent';
-import Drawer from '@material-ui/core/Drawer';
-import MenuIcon from '@material-ui/icons/Menu';
-import IconButton from '@material-ui/core/IconButton';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import Divider from '@material-ui/core/Divider';
-import ListItemsDrawer from './ListItemsDrawer'
 
 class UserRegistration extends Component {
     constructor(props) {
@@ -46,8 +32,6 @@ class UserRegistration extends Component {
             checkBoxs : false
 
         }
-        //this.handleChange = this.handleChange.bind(this);
-
     }
     onChange = (e) => {
         const checkedItems = this.state.checkedItems
@@ -92,10 +76,6 @@ class UserRegistration extends Component {
         })
         console.log('data---->', this.state.product)
         console.log("productId --- > ", this.state.product.id)
-        // this.state.product.map((key)=>{
-        //     this.state.allProductsId.push(key.id)
-        // })
-        // console.log(this.state.allProductsId)
 
 
 
@@ -106,7 +86,6 @@ class UserRegistration extends Component {
             userName: name,
 
         })
-        // console.log(this.state.userName)
     }
 
     onChangeEmail = (event) => {
@@ -299,7 +278,7 @@ class UserRegistration extends Component {
 
     render() {
 
-        // <option key={indx} value={item.product_name}>{item.product_name}</option>
+        
         let dropdown = this.state.product.map((item, indx) => {
             return (item === null ? '' : <div key={indx}>
                 <Checkbox value={item.id} onChange={this.onChange.bind(this)}  disabled={this.disableProductSelection()} />
@@ -312,12 +291,10 @@ class UserRegistration extends Component {
 <Snackbar open={this.state.alert.open} message={this.state.alert.message} ContentProps={{
                     style:
                         { backgroundColor: this.state.alert.backgroundColor }
-                }} anchorOrigin={{ vertical: "top", horizontal: "center" }}
-                    
+                }} anchorOrigin={{ vertical: "top", horizontal: "center" }}            
                     autoHideDuration={4000} 
                     onClose={() => this.setState({
                         alert: { open: false }
-
                      })}/>
 
                 <div className="page">

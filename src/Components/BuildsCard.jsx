@@ -1,9 +1,7 @@
 import React,{useEffect} from 'react';
-import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography';
 import Title from './TitleCard';
-import {getProductCount} from '../Services/ServiceNew'
 import {getBuildsCount} from '../Services/ServiceNew'
 const useStyles = makeStyles({
   depositContext: {
@@ -11,7 +9,6 @@ const useStyles = makeStyles({
   },
 });
 export default function BuildsCard(props) {
-  
   const [project, setProject] = React.useState([]);
   const [show, setShow] = React.useState(false);
   const [showData, setShowData] = React.useState(false);
@@ -43,19 +40,14 @@ console.log("here is props",props)
   const handleShowData = () => {
     setShowData(!showData);
   };
-  const handleBuilds=()=>{
-    
-    props.props.history.push("/BuildData");
-  // props.history.push("/BuildDetails")
-
-  }
+ 
   const classes = useStyles();
   return (
     <React.Fragment>
       <Title>Number of Builds</Title>
       <Typography component="p" variant="h4">
 
-      </Typography><span><h2>{JSON.stringify(project)}</h2></span>
+      </Typography><span><h2 style={{ color: "#5c5a56",fontWeight : '500'}}>{JSON.stringify(project)}</h2></span>
       <Typography color="textSecondary" className={classes.depositContext}></Typography>
      
     </React.Fragment>

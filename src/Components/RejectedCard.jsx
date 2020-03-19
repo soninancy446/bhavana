@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Title from './TitleCard';
@@ -35,19 +34,15 @@ export default function RejectsCard(props) {
   })
    
 }, []);
-  
-  const handleRejected=()=>{
-    props.props.history.push("/RejectedData")
-  }
+
   const classes = useStyles();
   return (
     <>
       <Title>Rejected Builds</Title>
       <Typography component="p" variant="h4">
 
-      </Typography><span><h2 style={{justifyContent:'center'}}>{JSON.stringify(project)}</h2></span>
+      </Typography><span><h2 style={{ color: "#5c5a56",fontWeight : '500'}}>{JSON.stringify(project)}</h2></span>
       <Typography color="textSecondary" className={classes.depositContext}></Typography>
-      
     </>
   );
 }

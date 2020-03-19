@@ -1,42 +1,32 @@
 import React, { useEffect } from 'react';
 import CloseIcon from '@material-ui/icons/Close';
-import { createMuiTheme } from '@material-ui/core/styles';
 import TablePagination from '@material-ui/core/TablePagination';
-// import AddCircleOutline from '@material-ui/icons/AddCircleOutline';
 import Snackbar from '@material-ui/core/Snackbar';
-import NativeSelect from '@material-ui/core/NativeSelect';
+import Select from '@material-ui/core/Select';
 import Card from '@material-ui/core/Card'
-import OutlinedInput from '@material-ui/core/OutlinedInput';
 import MenuItem from '@material-ui/core/MenuItem';
 import { triggerBuildUsingBranchfromCommitId } from '../Services/ServiceNew'
-import Reactpagination from './Reactpagination'
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { TextField, Dialog, DialogTitle, DialogContentText, CardHeader, CardContent } from '@material-ui/core';
-import FormControl from '@material-ui/core/FormControl';
+import { TextField, Dialog, DialogTitle, CardContent } from '@material-ui/core';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import GetAppOutlined from '@material-ui/icons/GetAppOutlined';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import { Link } from 'react-router-dom';
 import { Button } from '@material-ui/core';
 import { DialogContent } from '@material-ui/core';
-import Pagination from './Pagination'
-import { withStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Drawer from '@material-ui/core/Drawer';
 import Container from '@material-ui/core/Container';
 import { getProductBuildDetails } from '../Services/ServiceNew'
+import { getRejectedBuildsCount } from '../Services/ServiceNew'
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import Badge from '@material-ui/core/Badge';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import ListItemsDrawer from './ListItemsDrawer';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -45,12 +35,9 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Grid from '@material-ui/core/Grid';
-
 import Paper from '@material-ui/core/Paper';
-import Checkbox from '@material-ui/core/Checkbox';
 import { getTriggerBranchData } from '../Services/ServiceNew'
-import { getRejectedBuildsCount } from '../Services/ServiceNew'
-import { triggerBuildUsingBranch, getbuildsPerProduct, getApproveBuildsPerProduct } from '../Services/ServiceNew'
+import { triggerBuildUsingBranch, getBuildsCount,  getApproveBuildsCount } from '../Services/ServiceNew'
 const drawerWidth = 240;
 
 
@@ -254,15 +241,9 @@ export default function BuildDetails(props) {
     const handleDrawerClose = () => {
         setOpen(false);
     };
-    const handleRadioGroupChange = (value) => {
-        setProject(project=>[project,value]);
-        setValue(value)
-        if (value === 1) {
-            setSecondradionbutton(true)
-        }
-        else
-            setradioButton(true);
-    }
+    
+
+    const disableOtherOption = () => { }
     const radioButtononeClick = () => {
         //setradioButton();
         setSecondradionbutton(true)
@@ -277,20 +258,15 @@ export default function BuildDetails(props) {
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
     const handleDeshboard = () => {
 
-        //validation api call and logout
         props.history.push("/Dashboard");
         console.log("MyDashboard");
     };
     const handleAllProduct = () => {
         console.log("GetAllProducts");
 
-        //validation api call and logout
-
         props.history.push("/GetAllProductsComponent");
     }
-    //     const handleRadioGroupChange = ()=>{
-    // console.log("hi")
-    //     }
+
     const [holdBranch, setHoldBranch] = React.useState('')
     const handleBranchData = age => event => {
         setState(
@@ -298,8 +274,9 @@ export default function BuildDetails(props) {
                 ...state,
                 [age]: event.target.value
             }
-
         )
+        setCreateproductname('')
+        setDisableOtherOptionOfRadioButton1(false)
         setHoldBranch(event.target.value)
         console.log("branchName", event.target.value)
 
@@ -310,10 +287,10 @@ export default function BuildDetails(props) {
     }
     const triggerBuild = () => {
         setOpenPaper(false)
-        console.log('commitId---->',createProductName)
-        console.log("holdbranch---->",holdBranch)
-       
-         if(holdBranch == 'qa' || holdBranch == 'dev' || holdBranch == 'stage' || holdBranch == 'master'){
+        console.log('commitId---->commitId', createProductName)
+        console.log("holdbranch---->branchname", holdBranch)
+
+        if (holdBranch == 'qa' || holdBranch == 'dev' || holdBranch == 'stage' || holdBranch == 'master') {
             triggerBuildUsingBranch(holdBranch, props.location.state.producId).then((res) => {
                 if (res.status == '401') {
                     sessionStorage.removeItem('token')
@@ -327,15 +304,14 @@ export default function BuildDetails(props) {
                 }
             }).then((key) => {
 
-                setAlert({ open: true, message: "Build Triggered Successfully !!!", backgroundColor: "#5c5959" })
+                setAlert({ open: true, message: "Build Triggered Successfully with brnach!!!", backgroundColor: "#5c5959" })
                 console.log(key)
             }).catch((err) => {
 
                 setAlert({ open: true, message: "Something went wrong !!!", backgroundColor: "#5c5959" })
             })
         }
-        else{
-
+        else {
             triggerBuildUsingBranchfromCommitId(createProductName, props.location.state.producId).then((res) => {
                 if (res.status == '401') {
                     sessionStorage.removeItem('token')
@@ -350,7 +326,7 @@ export default function BuildDetails(props) {
 
             }).then((key) => {
                 setCreateproductname('')
-                setAlert({ open: true, message: "Build Triggered Successfully !!!", backgroundColor: "#5c5959" })
+                setAlert({ open: true, message: "Build Triggered Successfully with commitId!!!", backgroundColor: "#5c5959" })
                 console.log(key)
             }).catch((err) => {
 
@@ -394,23 +370,46 @@ export default function BuildDetails(props) {
     const [buildsOfEach, setBuildsOfEach] = React.useState('');
     const [approveBuilds, setApproveBuilds] = React.useState('')
     const [rejectBuilds, setRejectBuilds] = React.useState('')
-    
     const [perticularpdoductName, setParticularProductName] = React.useState('');
     const [page, setPage] = React.useState(0);
-
+    const [disableOtherOptionOfRadioButton1, setDisableOtherOptionOfRadioButton1] = React.useState(false)
+    const [disableOtherOptionOfRadioButton2, setDisableOtherOptionOfRadioButton2] = React.useState(false)
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
-    
+   
+    const dis=()=>{
+        setDisableOtherOptionOfRadioButton1(true)
+    }
 
+    const handleRadioGroupChange = (value) => {
+        
+
+
+        setValue(value)
+        if (value == 1) {
+            console.log("value 1 before button1", disableOtherOptionOfRadioButton1)
+            console.log("value 1 before button2", disableOtherOptionOfRadioButton2)
+            setDisableOtherOptionOfRadioButton2(true)
+            setDisableOtherOptionOfRadioButton1(true)
+            console.log("value 1 after button1", disableOtherOptionOfRadioButton1)
+            console.log("value 1 after button2", disableOtherOptionOfRadioButton2)
+        }
+        else if (value == 2){
+            console.log("before button1", disableOtherOptionOfRadioButton1)
+        console.log("before button2", disableOtherOptionOfRadioButton2)
+            setDisableOtherOptionOfRadioButton1(false)
+        setDisableOtherOptionOfRadioButton2(false)
+        console.log("after button1", disableOtherOptionOfRadioButton1)
+        console.log("after button2", disableOtherOptionOfRadioButton2)
+        }
+
+    }
 
     useEffect(() => {
-
-        //console.log(props)
         getProductBUilds()
-         getBuildsForEveryProduct()
-         getApproveBUildsForEachProduct()
-         getRejectBUildsForEachProduct()
-
-
+        getBuildsForEveryProduct()
+        getApproveBUildsForEachProduct()
+        getRejectBUildsForEachProduct()
+        getBranchData()
     }, [])
     const getProductBUilds = () => {
         getProductBuildDetails(props.location.state.producId).then((res) => {
@@ -428,12 +427,9 @@ export default function BuildDetails(props) {
             console.log(key)
             setProject(key)
         }).catch((err) => {
-
             console.log(err)
         })
     }
-
-
 
     const getBranchData = () => {
         getTriggerBranchData().then((res) => {
@@ -456,48 +452,41 @@ export default function BuildDetails(props) {
     }
 
     const getBuildsForEveryProduct = () => {
-        getbuildsPerProduct(props.location.state.producId).then((res) => {
-            if (res.status == '401') {
-                sessionStorage.removeItem('token')
-                sessionStorage.removeItem('role')
-                props.history.push('/')
-            }
-            else {
-                console.log(res.clone().json())
-                return res.json()
-            }
-
-            // console.log(res.clone().json())
-            // return res.json()
-        }).then((key) => {
-            console.log("numberOfBuilds", key)
-            setBuildsOfEach(key)
-
-        }).catch((err) => {
-
-        })
+    getBuildsCount().then((res)=>{
+        if (res.status == '401') {
+          sessionStorage.removeItem('token')
+          sessionStorage.removeItem('role')
+          props.history.push('/')
+      }
+      else {
+          console.log(res.clone().json())      
+          return res.json()
+      }
+      }).then((key)=>{
+        console.log("No.Of Builds-->",key)
+        setBuildsOfEach(key)
+      }).catch((err)=>{
+        
+    })
     }
 
+
     const getApproveBUildsForEachProduct = () => {
-        getApproveBuildsPerProduct(props.location.state.producId).then((res) => {
-            if (res.status == '401') {
-                sessionStorage.removeItem('token')
-                sessionStorage.removeItem('role')
-                props.history.push('/')
-            }
-            else {
-                console.log(res.clone().json())
-                return res.json()
-            }
-
-
-        }).then((key) => {
-            console.log("approvedBuilds", key)
+    getApproveBuildsCount().then((res)=>{
+        if (res.status == '401') {
+          sessionStorage.removeItem('token')
+          sessionStorage.removeItem('role')
+          props.history.push('/')
+      }
+      else {
+          console.log(res.clone().json())      
+          return res.json()
+      }
+      }).then((key)=>{
+         console.log("approvedBuilds", key)
             setApproveBuilds(key)
-        }).catch((err) => {
-
-        })
-
+      }).catch((err)=>{   
+    })
     }
     const getRejectBUildsForEachProduct = () => {
         getRejectedBuildsCount(props.location.state.producId).then((res) => {
@@ -521,6 +510,7 @@ export default function BuildDetails(props) {
 
     }
 
+
     const calculatePercentage = () => {
         console.log('numberOfBuilds', approveBuilds)
         console.log('buildsOfApproving', buildsOfEach)
@@ -528,9 +518,9 @@ export default function BuildDetails(props) {
         if (approveBuilds == '0' && buildsOfEach == '0'&&rejectBuilds=='0') {
             return 0
         }
-        else  {
-            // return approveBuilds / buildsOfEach * 100
-            return (approveBuilds/(rejectBuilds+approveBuilds))*100
+        else {
+            return ((approveBuilds/(rejectBuilds+approveBuilds))*100).toFixed(2)
+            // return (approveBuilds / buildsOfEach * 100).toFixed(2)
         }
     }
 
@@ -568,9 +558,21 @@ export default function BuildDetails(props) {
         setRowsPerPage(parseInt(event.target.value, 10));
         setPage(0);
     };
+const setField =(event)=>{
+    setCreateproductname(event.target.value)
+    console.log("new name --< hello ---",createProductName)
+    setState(
+        {     
+            age: ''
+        }
+
+    )
+    setHoldBranch('')
+}
     return (
 
         <div className={classes.root}>
+
             <CssBaseline />
             <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
                 <Toolbar className={classes.toolbar}>
@@ -587,7 +589,7 @@ export default function BuildDetails(props) {
                         List of Builds
         </Typography>
                     <Typography className={classes.username} componnet="h2">
-                        Hi,{sessionStorage.getItem('name')}
+                        hi,{sessionStorage.getItem('name')}
                     </Typography>
                 </Toolbar>
             </AppBar>
@@ -629,7 +631,7 @@ export default function BuildDetails(props) {
                         <Dialog open={openPaper} PaperProps={{
                             style: {
                                 paddingTop: "3em",
-                                paddingBottom: "3em",
+                                paddingBottom: "4em",
                                 paddingLeft: "6em",
                                 paddingRight: "6em"
                             }
@@ -645,71 +647,36 @@ export default function BuildDetails(props) {
                                     </Grid>
                                 </Grid>
                             </DialogTitle>
-
                             <DialogContent >
                                 <Divider></Divider>
-                                <Grid conteiner alignItems="flex-start">
-                                    <Grid item style={{ paddingTop: "2em" }}>
-
-                                        <div className="left">
-                                            <RadioGroup aria-label="role" className="triggerBuild" row  >
-
-                                                {radioButton === false ?
-
-
-                                                    <FormControlLabel control={<Radio />} value="1" onClick={() => handleRadioGroupChange(1)} label={
-                                                        <select native class="DropList" value={state.age} onChange={handleBranchData('age')}
-                                                            inputProps={{
-                                                                name: 'age',
-                                                                //id: 'age-native-simple',
-                                                            }}
-
-                                                        >
-                                                            <option value="none" >Select Branch</option>
-                                                            <option value="dev" >dev</option>
-                                                            <option value="qa">qa</option>
-                                                            <option value="stage">stage</option>
-                                                            <option value="master">master</option>
-
-                                                        </select>} /> : <FormControlLabel control={<Radio />} value="1" disabled onClick={() => handleRadioGroupChange(1)}
-                                                            label={<select value={state.age} native class="DropList" disabled onChange={handleBranchData('age')}
-                                                                inputProps={{
-                                                                    name: 'age',
-                                                                    //id: 'age-native-simple',
-                                                                }}
-                                                            >
-
-                                                                <option value="dev">dev</option>
-                                                                <option value="qa">qa</option>
-                                                                <option value="stage">stage</option>
-                                                                <option value="master">master</option>
-                                                            </select>} />
-                                                }
-
-                                            </RadioGroup>
-                                        </div>
-
+                                <Grid conteiner >
+                                    <Grid item style={{ paddingTop: "2em" , paddingLeft : '5em'}}>              
+                                            <RadioGroup aria-label="role"  row  >
+                                                <Grid item style={{ }}>
+                                                <FormControlLabel control={<Radio />} value="1" onChange={(event)=>handleRadioGroupChange(event.target.value)} label={
+                                                   
+                                                   <Select value={state.age} defaultValue="title" onChange={handleBranchData('age')} style={{width : '15em'}}
+                                                    displayEmpty renderValue={state.age.length >0 ? undefined : ()=>"Select Branch"} 
+                                                      open={disableOtherOptionOfRadioButton1}   >
+                                                        {branchName.map((id) => {
+                                                            return (
+                                                                <MenuItem   value={id.branch_name}  >{id.branch_name}</MenuItem>
+                                                            )
+                                                        })}
+                                                    </Select>} />
+                                                    </Grid>
+                                                <Grid item style={{  paddingLeft: "0em" }}> 
+                                                        <FormControlLabel value="2" onChange={(event)=>handleRadioGroupChange(event.target.value)} control={<Radio />} label={<div>
+                                                            <TextField id="outlined-basic" style={{width : "15em"}}
+                                                                disabled={disableOtherOptionOfRadioButton2} label="Enter Commit Id" variant="standard" value={createProductName}
+                                                                onChange={e => setField(e)}
+                                                                labelWidth={70} /></div>} onClick={() => { handleRadioGroupChange() }} />
+                                                </Grid>
+                                            </RadioGroup>          
                                     </Grid>
-                                    <Grid item>
-                                        <div className="right">
-
-                                            {secondradionbutton === false ? <FormControlLabel value="2" onClick={() => handleRadioGroupChange(2)} control={<Radio />} label={<div><TextField id="outlined-basic" label="Commit id" variant="standard" value={createProductName}
-                                                onChange={e => setCreateproductname(e.target.value)}
-                                                labelWidth={70} />
-
-                                            </div>} onClick={() => { handleRadioGroupChange() }} /> : <FormControlLabel disabled value="2" placeholder="abc" onClick={() => handleRadioGroupChange(2)} control={<Radio />} label={<div><TextField id="outlined-basic" variant="standard" value={createProductName}
-                                                onChange={e => setCreateproductname(e.target.value)}
-                                                labelWidth={70} />
-
-                                            </div>} onClick={() => { handleRadioGroupChange() }} />}
-                                        </div>
-                                    </Grid>
-                                    <Grid item style={{ paddingTop: "2em", paddingLeft: "8em" }} justify="flex-end" >
-
+                                    <Grid item style={{ paddingTop: "2em", paddingLeft: "10em" }} justify="flex-end" >
                                         <Button variant="contained" onClick={() => { triggerBuild() }}>Trigger</Button>
                                     </Grid>
-
-
                                 </Grid>
                             </DialogContent>
                         </Dialog>
@@ -721,7 +688,7 @@ export default function BuildDetails(props) {
                             <Card className={classes.reducesize}>
                                 <Grid item>
                                     <Typography varient="h3">
-                                        <CardContent style={{ fontSize: "30px" }}>Product - {props.location.state.productName === null ? props.history.push('/') : props.location.state.productName}</CardContent>
+                                        {/* <CardContent style={{ fontSize: "30px" }}>Product - {props.location.state.productName === null ? props.history.push('/') : props.location.state.productName}</CardContent> */}
                                     </Typography>
                                 </Grid>
 

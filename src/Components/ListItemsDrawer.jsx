@@ -7,8 +7,6 @@ import PeopleIcon from '@material-ui/icons/People';
 import NotesIcon from '@material-ui/icons/Notes';
 import PersonIcon from '@material-ui/icons/Person';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
-import { Button } from '@material-ui/core';
-// import Dashboard from './Dashboard'
 
 export default class ListItemsDrawer extends Component{
   constructor(props){

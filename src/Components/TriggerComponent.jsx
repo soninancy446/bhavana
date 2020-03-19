@@ -5,34 +5,21 @@ import Typography from '@material-ui/core/Typography';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import CardHeader from '@material-ui/core/CardHeader';
 import clsx from 'clsx';
-import { getApproveBuilds } from '../Services/ServiceNew'
 import CardContent from '@material-ui/core/CardContent';
 import Drawer from '@material-ui/core/Drawer';
 import Container from '@material-ui/core/Container';
 import Divider from '@material-ui/core/Divider';
-import { Link } from 'react-router-dom';
 import IconButton from '@material-ui/core/IconButton';
 import { Button, Card } from '@material-ui/core';
-import TextField from '@material-ui/core/TextField';
-// import Badge from '@material-ui/core/Badge';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-// import NotificationsIcon from '@material-ui/icons/Notifications';
 import Snackbar from '@material-ui/core/Snackbar';
 import ListItemsDrawer from './ListItemsDrawer';
-import { getRejecteddBuilds, approveBuilds } from '../Services/ServiceNew';
-import FormLabel from '@material-ui/core/FormLabel';
+import {  approveBuilds } from '../Services/ServiceNew';
 import { rejectBuilds,singleBuildDetails } from '../Services/ServiceNew'
-// import Table from '@material-ui/core/Table';
-// import TableBody from '@material-ui/core/TableBody';
-// import TableCell from '@material-ui/core/TableCell';
-// import TableHead from '@material-ui/core/TableHead';
-// import TableRow from '@material-ui/core/TableRow';
-// import Pagination from './Pagination'
 import Grid from '@material-ui/core/Grid';
-// import Paper from '@material-ui/core/Paper';
-// import TableContainer from '@material-ui/core/TableContainer';
+
 
 const drawerWidth = 240;
 
@@ -262,7 +249,7 @@ export default function BuildDetails(props) {
           return res.json()
               }
         }).then((key)=>{
-           sessionStorage.setItem('date',key.timestamp)
+           //sessionStorage.setItem('date',key.timestamp)
          //  setDate(key.timestamp)
            var result=date.slice(0,10)
            setCurrentDateTime(result)
@@ -360,6 +347,12 @@ const [currentDateTime,setCurrentDateTime] = React.useState('')
                 getBuildDetails()
                 
 
+                
+               
+               
+                // props.history.push({
+                //     pathname: "/BUildDetails", state: { producId: props.location.state.versionId, productName: productDetails.product_name }
+                // });
                 console.log(res.clone().json())
                 return res.json()
             }
@@ -404,7 +397,7 @@ const [currentDateTime,setCurrentDateTime] = React.useState('')
                      Confirmation
                     </Typography>
                     <Typography className={classes.username} componnet="h2">
-          Hi,{sessionStorage.getItem('name')}
+          hi,{sessionStorage.getItem('name')}
         </Typography>
                 </Toolbar>
             </AppBar>
